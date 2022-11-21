@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <title>Document</title>
+    <style>
+      /* @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,600;1,600&family=Poppins:wght@300&display=swap'); */
+
+
+body {
+    font-family: cursive;
+    margin: 0;
+    background-color: rgb(8, 62, 77);
+    font-size: 1em;
+}
+.calendar-page {
+    background:#e4e8cc;
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    overflow: auto;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.buttion-prev-next button {
+    cursor: pointer;
+    display: inline-block;
+    zoom: 1;
+    background: #5b4fdf;
+    color: #fff;
+    border: 1px solid #29491d;
+    border-radius: 18px;
+    padding: 6px 25px;
+}
+
+
+.calender-tableformat {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.calender-tableformat td, .calender-tableformat th {
+    padding: 15px;
+    border: 2px solid #a59191;
+    text-align: center;
+    vertical-align: top;
+    background-color: #bdebbf;
+}
+
+.date-picker:nth-child(1) {
+  color: #ef0e0a;
+}
+
+#titlemonth-year {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 2rem;
+    /* visibility: hidden; */
+}
+.container {
+    margin: 15px auto;
+    max-width: 1100px;
+}
+
+.buttion-prev-next {
+    position: relative;
+    margin-bottom: 1em;
+    overflow: hidden;
+    clear: both;
+}
+
+#prevbuttion {
+    float: left;
+}
+
+#Nextbuttion {
+    float: right;
+}
+
+.calendar-month {
+    margin-top: 1em;
+    padding: 10px 0;
+    float: right;
+}
+
+.calendar-month select {
+    cursor: pointer;
+    display: inline-block;
+    zoom: 1;
+    background: #ffffff;
+    color: #585858;
+    border: 1px solid #bfc5c5;
+    border-radius: 3px;
+    padding: 5px 1em;
+}
+html {
+    font-size: 15px;
+    line-height: 1.4;
+    color: #444;
+}
+.Enterbar{
+    margin-top: 20px;
+}
+.Enterbar input{
+    width: 30%;
+    height: 50px;
+}
+.Enterbar button{
+    width: 20%;
+    height: 50px;
+    margin-left: 20px;
+    background-color: rgb(140, 95, 183);
+}
+#month:hover{
+    background-color: #00BCD4;
+    cursor: pointer;
+}
+#month{
+    background-color: #53e23d;
+    
+}
+#year:hover{
+    background-color: #40d400;
+    cursor: pointer;
+}
+#year{
+    background-color: #9ba629;
+}
+.calendar-page h3{
+    background-color: rgb(201, 127, 127);
+}
+
+@media screen and (min-width: 0px) and (max-width: 576px) {
+    body {
+    font-size: 7px;
+    }
+    .calender-tableformat {
+    border-collapse: collapse;
+    width: 50%;
+}
+#titlemonth-year {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 20px;
+    /* visibility: hidden; */
+}
+.calendar-page {
+    background: #e4e8cc;
+    padding: 0px;
+    max-width: 587px;
+    margin: 0 auto;
+    overflow: auto;
+}
+.Enterbar input {
+    width: 30%;
+    height: 30px;
+}
+.Enterbar button {
+    width: 18%;
+    height: 35px;
+    margin-left: 10px;
+    font-size: 8px;
+}
+.buttion-prev-next {
+    position: relative;
+    margin-bottom: 1em;
+    overflow: hidden;
+    clear: both;
+}
+.Enterbar {
+    margin-bottom: 18px;
+    margin-top: 15px;
+}
+.buttion-prev-next button {
+    cursor: pointer;
+    display: inline-block;
+    zoom: 1;
+    background: #5b4fdf;
+    color: #fff;
+    border: 1px solid #29491d;
+    border-radius: 18px;
+    padding: 1px 15px;
+}
+.calendar-month {
+    margin-top: 1em;
+    padding: 3px 0px;
+    float: right;
+}
+.calender-tableformat td, .calender-tableformat th {
+    padding: 11px;
+    border: 2px solid #a59191;
+    text-align: center;
+    vertical-align: top;
+    background-color: #bdebbf;
+    font-size: 7px;
+}
+
+
+
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calendar-page">
+            <h3 style="color: rgb(2, 6, 8); size: 10px;" id="titlemonth-year"></h3>
+            
+            <div class="calendar-month">
+                <select id="month" onchange="jump()">
+                   <!-- <option value="0">Select month</option> -->
+                    <option  value=0>JAN</option>
+                    <option  value=1>FEB</option>
+                    <option  value=2>MAR</option>
+                    <option  value=3>APR</option>
+                    <option  value=4>MAY</option>
+                    <option  value=5>JUN</option>
+                    <option  value=6>JUL</option>
+                    <option  value=7>AUG</option>
+                    <option  value=8>SEP</option>
+                    <option  value=9>OCT</option>
+                    <option  value=10>NOV</option>
+                    <option  value=11>DEC</option>
+                </select>
+                <select id="year" onchange="jump()"></Select>     
+           </div>
+
+            <div class="buttion-prev-next">
+                <button id="prevbuttion" onclick="previous()">Prev</button>
+                <button id="Nextbuttion" onclick="next()">Next</button>
+            </div>
+            <table class="calender-tableformat" id="table-data" data-lang="en">
+                <thead id="table-heading-month"></thead>
+                <tbody id="table-body-data"></tbody>
+                
+            </table>
+            <div class="Enterbar">
+                <input type="" id="date-input" 
+                    value="" placeholder="Enter Any Date">
+                    <button id="date-input-submit">Enter</button>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script>
+    function showCalenderYear(start, end) {
+    let Calenderyear = "";
+    for (let year = start; year <= end; year++) {
+        Calenderyear += "<option value='" + year + "'>" + year + "</option>";
+    }
+    return Calenderyear;
+}
+
+NewDate = new Date();
+NewMonth = NewDate.getMonth();
+NewYear = NewDate.getFullYear();
+yearsel = document.getElementById("year");
+monthsel = document.getElementById("month");
+
+yeargenrate = showCalenderYear(1949, 2030);
+
+document.getElementById("year").innerHTML = yeargenrate;
+
+let table_data = document.getElementById("table-data");
+let lang = table_data.getAttribute('data-lang');
+
+let months = "";
+let days = "";
+
+let DefaultMONTH = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+let dayDef = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+if (lang == "en") {
+    months = DefaultMONTH;
+    days = dayDef;
+} else if (lang == "id") {
+    months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    days = ["harMahadev", "jaiMahalakxmi", "jaiBhojajiMaharaj", "ohmsaibaba", "jaishreeRam", "jaiBajrangbali", "Holiday"];
+} else if (lang == "fr") {
+    months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    days = ["birth", "swift", "Mghecter", "Tata", "Bmw", "hero", "Honda"];
+} else {
+    months = DefaultMONTH;
+    days = dayDef;
+}
+
+
+var $dataHead = "<tr>";
+for (dhead in days) {
+    $dataHead += "<th data-days='" + days[dhead] + "'>" + days[dhead] + "</th>";
+}
+$dataHead += "</tr>";
+
+
+document.getElementById("table-heading-month").innerHTML = $dataHead;
+
+
+yearmonth = document.getElementById("titlemonth-year");
+showCalendar(NewMonth, NewYear);
+
+function jump() {
+    NewYear = parseInt(yearsel.value);
+    NewMonth = parseInt(monthsel.value);
+    showCalendar(NewMonth, NewYear);
+}
+function previous() {
+    NewYear = (NewMonth === 0) ? NewYear - 1 : NewYear;
+    NewMonth = (NewMonth === 0) ? 11 : NewMonth - 1;
+    showCalendar(NewMonth, NewYear);
+}
+
+function next() {
+    NewYear = (NewMonth === 11) ? NewYear + 1 : NewYear;
+    NewMonth = (NewMonth + 1) % 12;
+    showCalendar(NewMonth, NewYear);
+}
+
+function daysInMonth(iMonth, iYear) {
+    return 32 - new Date(iYear, iMonth, 32).getDate();
+}
+
+
+function showCalendar(month, year) {
+
+    var firstDay = ( new Date( year, month ) ).getDay();
+
+    tbl = document.getElementById("table-body-data");
+
+    tbl.innerHTML = "";
+
+    yearmonth.innerHTML = months[month] + " " + year;
+    yearsel.value = year;
+    monthsel.value = month;
+
+    var date = 1;
+    for ( var i = 0; i < 6; i++ ) {
+        
+        var row = document.createElement("tr");
+
+        
+        for ( var j = 0; j < 7; j++ ) {
+            if ( i === 0 && j < firstDay ) {
+                cell = document.createElement( "td" );
+                cellText = document.createTextNode("");
+                cell.appendChild(cellText);
+                row.appendChild(cell);
+            } else if (date > daysInMonth(month, year)) {
+                break;
+            } else {
+                cell = document.createElement("td");
+                cell.setAttribute("data-date", date);
+                cell.setAttribute("data-month", month + 1);
+                cell.setAttribute("data-year", year);
+                cell.setAttribute("data-month_name", months[month]);
+                cell.className = "date-picker";
+                cell.innerHTML = "<span>" + date + "</span>";
+
+                if ( date === NewDate.getDate() && year === NewDate.getFullYear() && month === NewDate.getMonth() ) {
+                    cell.className = "date-picker selected";
+                }
+                row.appendChild(cell);
+                date++;
+            }
+
+
+        }
+
+        tbl.appendChild(row);
+    }
+
+}
+
+function highlightDate(dateInInt){
+    const dateElement = document.querySelector("td[data-date='"+dateInInt+"']");
+    dateElement.style.background = 'green';
+    dateElement.style.color = 'white';
+}
+
+document.querySelector("#date-input-submit").addEventListener("click",()=>{
+    const date = document.querySelector("#date-input").value;
+    highlightDate(date)
+})
+
+
+
+</script>
+</html>
